@@ -1,0 +1,39 @@
+.authentication-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+  
+    .sign-up-container, .sign-in-container {
+      flex: 1;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+  
+      .sign-up-container, .sign-in-container {
+        width: 100%;
+        max-width: 90%;
+      }
+    }
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  
+    @media (max-width: 768px) {
+      flex-direction: column;  // stack buttons vertically
+      width: 100%;
+  
+      button {
+        width: 100%; // optional: make buttons full width on mobile
+      }
+    }
+  }
+  
