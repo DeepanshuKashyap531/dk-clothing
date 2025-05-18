@@ -1,16 +1,19 @@
 import { createContext , useEffect, useReducer} from "react";
 import { onAuthChangedListner ,createUserDocumentFromAuth} from "../utils/firebase/firebase.utils";
+import { CreateAction } from "../utils/reducer/reducers.utlis";
 // as the actual value u want to excess
 export const UserContext = createContext({
     currentUser: null,
     setCurrentUser: () => null,
 });
 
-const USER_ACTION_TYPES = {
+export const USER_ACTION_TYPES = {
     SET_CURRENT_USER : 'SET_CURRENT_USER'
 }
 
-
+const INITIAL_STATE = {
+    currentUser : null
+}
 const userReducer = (state,action) => {
     const {type , payload} = action ;
 
@@ -23,19 +26,14 @@ const userReducer = (state,action) => {
      default:
         throw new Error(`Unhandled type ${type} in userReducer`);
     }
-}
-
-const INITIAL_STATE = {
-    currentUser : null
-}
-
+};
 
 export const UserProvider = ({children}) =>{
     // const [currentUser , setCurrentUser] = useState(null)
     const [{ currentUser } , dispatch] = useReducer(userReducer , INITIAL_STATE )
 
     const setCurrentUser = (user) => {
-          dispatch({type: USER_ACTION_TYPES.SET_CURRENT_USER, payload : user});
+          dispatch(CreateAction( USER_ACTION_TYPES.SET_CURRENT_USER,user));
     };
 
     const value = {currentUser,setCurrentUser}
